@@ -16,7 +16,8 @@ void build_ncr(){  // O(n^2)
 
 }
 
-void build_bell(){
+//  [https://en.wikipedia.org/wiki/Bell_number]
+void build_bell(){  // O(n^2)
 
     ll sum=0;
     bell[0]=1;
