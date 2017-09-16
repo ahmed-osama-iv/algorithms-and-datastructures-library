@@ -7,6 +7,7 @@ using namespace std;
 
 ll cat[MAX];
 
+// [https://en.wikipedia.org/wiki/Catalan_number]
 //catalan(n) =~ 4^n / ( n^(3/2) * sqrt(PI) )    grows exponential
 
 void build_catalan_1(){  // O(n^2) "doesn't need mod inverse"
