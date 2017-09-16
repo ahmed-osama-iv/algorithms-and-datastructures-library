@@ -19,6 +19,7 @@ void build_catalan_1(){  // O(n^2) "doesn't need mod inverse"
 
         for(int j=0; j<=i; j++){
             cat[i+1] += cat[j] * cat[i-j] % MOD;
+            cat[i+1] %= MOD;
         }
     }
 
