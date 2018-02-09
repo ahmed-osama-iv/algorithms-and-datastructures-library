@@ -12,12 +12,10 @@ int k2_anc(int v, int k){     // Return the 2^k ancestor O(k)
 int kth_anc(int v, int k){   // Return the k-th ancestor O(log k)
 
     int u=v, h=0;
-
     while(k){
         if(k&1)u = k2_anc(u, h);
-        k/=2;
-        h++;
+        k/=2, h++;
     }
-
+    
     return u;
 }
