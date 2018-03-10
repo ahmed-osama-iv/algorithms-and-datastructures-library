@@ -8,7 +8,7 @@ using namespace std;
 
 struct node{
 
-    node *child[128], *fail, *parent;
+    node *child[128], *fail;
     vector <int> ptrnIdx;
     char ch;
 };
@@ -16,8 +16,8 @@ struct node{
 struct aho_corasick{
 
     vector <int> res;
-    int ptrnsCount = 0;
-    node *root = new node();    
+    int ptrnsCounter = 0;
+    node *root = new node();
 
     void add(char *ch){
 
@@ -32,51 +32,57 @@ struct aho_corasick{
             }
         }
 
-        cur->ptrnIdx.push_back(ptrnsCount++);
+        cur->ptrnIdx.push_back(ptrnsCounter++);
         res.push_back(0);
     }
 
+    node *move(node *cur, char ch){
+        cur = cur->fail;
+        while(!cur->child[ch])
+            cur = cur->fail;
+        return cur->child[ch];
+    }
+
+
     void build(){
 
+        node *k, *f;
+        queue <node*> q;
         root->fail = root;
+
         for(int i=0; i<128; i++){
             if(root->child[i]){
                 root->child[i]->fail = root;
-                dfs(root->child[i]);
+                q.push(root->child[i]);
+            }else{
+                root->child[i] = root;
             }
         }
-    }
 
-    void dfs(node *cur){
-
-        for(int i=0; i<128; i++){
-            if(cur->child[i]){
-                if(cur->fail->child[cur->child[i]->ch]){
-                    cur->child[i]->fail = cur->fail->child[cur->child[i]->ch];
-
-                    for(auto ptrn:cur->fail->child[cur->child[i]->ch]->ptrnIdx){
-                        cur->child[i]->ptrnIdx.push_back(ptrn);
-                    }
-
-                }else{
-                    cur->child[i]->fail = root;
+        while(!q.empty()){
+            k = q.front();
+            q.pop();
+            for(int i=0; i<128; i++){
+                if(k->child[i]){
+                    f = move(k, k->child[i]->ch);
+                    k->child[i]->fail = f;
+                    k->child[i]->ptrnIdx.insert(k->child[i]->ptrnIdx.end(), f->ptrnIdx.begin(), f->ptrnIdx.end());
+                    q.push(k->child[i]);
                 }
-
-                dfs(cur->child[i]);
             }
         }
+
     }
 
     void answer(char *ch){
 
         node *cur = root, *prev;
         for(; *ch; ch++){
+
             if(cur->child[*ch]){
                 cur = cur->child[*ch];
-            }else if(cur->fail->child[*ch]){
-                cur = cur->fail->child[*ch];
             }else{
-                cur = root;
+                cur = move(cur, *ch);
             }
 
             for(auto ptrn:cur->ptrnIdx){
