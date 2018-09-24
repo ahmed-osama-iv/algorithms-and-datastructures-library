@@ -43,28 +43,27 @@ bool Graph::BFS(int s, int t){
     memset(level, -1, sizeof(int) * V);
 
     level[s] = 0;
-    list< int > q;
-    q.push_back(s);
+    queue <int> q;
+    q.push(s);
 
     vector<Edge>::iterator i ;
     while (!q.empty()){
 
         int u = q.front();
-        q.pop_front();
+        q.pop();
         for (i = adj[u].begin(); i != adj[u].end(); i++){
 
             Edge &e = *i;
             if (level[e.to] < 0  && e.flow < e.c){
 
                 level[e.to] = level[u] + 1;
-                q.push_back(e.to);
+                q.push(e.to);
             }
         }
     }
 
     return level[t] < 0 ? false : true ;
 }
-
 
 int Graph::sendFlow(int u, int flow, int t){
 
