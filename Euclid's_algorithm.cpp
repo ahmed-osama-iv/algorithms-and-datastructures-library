@@ -1,4 +1,4 @@
-Euclid's algorithm, etc. (C++)
+//Euclid's algorithm, etc. (C++)
 
 // This is a collection of useful code for solving problems that
 // involve modular linear equations.  Note that all of the
