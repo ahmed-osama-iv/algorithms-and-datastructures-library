@@ -28,18 +28,18 @@ int LCA(int v,int u) { // O(LogN)
 	if(lvl[v] < lvl[u])
 		swap(v, u);
 	for(int i = maxLog-1; i>=0; i--)
-		if(anc[v][i] + 1 && lvl[anc[v][i]] >= lvl[u])
+		if(lvl[anc[v][i]] >= lvl[u])
 			v = anc[v][i];
 
 	if(v == u)
 		return v;
 	for(int i = maxLog-1; i >= 0; i--)
-		if(anc[v][i] - anc[u][i])
+		if(anc[v][i] != anc[u][i])
 			v = anc[v][i], u = anc[u][i];
 	return anc[v][0];
 }
 
-int pathAns(int u, int v){  // O(LogN)
+int pathAns(int u, int v){
     int lca = LCA(u, v);
     int res = INF;
 
