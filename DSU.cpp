@@ -1,12 +1,12 @@
-
-const int MAXN = 1e5+5;
-
 struct DSU {
 
-    int id[MAXN], sz[MAXN];
+    int *id, *sz, Size;
 
-    DSU() {
-        for(int i = 0; i < MAXN; i++) {
+    DSU(int _Size){
+        Size = _Size;
+        id = new int[Size];
+        sz = new int[Size];
+        for(int i = 0; i < Size; i++) {
             id[i] = i, sz[i] = 1;
         }
     }
@@ -26,3 +26,4 @@ struct DSU {
         id[b] = a;
     }
 };
+
