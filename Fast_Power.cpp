@@ -1,5 +1,8 @@
 ll __pow(ll base, ll power, ll mod=MOD){
+    
+    base %= mod;
     ll result = 1;
+    
     while(power > 0) {
 
         if(power & 1){ // power % 2 == 1
