@@ -48,7 +48,7 @@ int LCA(int u, int v) { // O(LogN)
 	return anc[u][0];
 }
 
-int pathAns(int u, int v) {
+int pathAns(int u, int v) { // O(LogN)
 
 	int res = 0;
 
