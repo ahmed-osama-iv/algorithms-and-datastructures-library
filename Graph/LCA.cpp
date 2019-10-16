@@ -27,6 +27,17 @@ void buildLCA(int u, int p) { // O(NlogN)
 	}
 }
 
+int kth_anc(int u, int k) { // O(NlogN)
+
+    int cur = u, h = 0;
+    while(k) {
+        if(k & 1) cur = anc[res][h];
+        k/=2, h++;
+    }
+
+    return cur;
+}
+
 int LCA(int u, int v) { // O(LogN)
 
 	if(lvl[u] < lvl[v]) swap(u, v);
