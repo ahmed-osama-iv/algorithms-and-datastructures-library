@@ -31,7 +31,7 @@ int kth_anc(int u, int k) { // O(NlogN)
 
     int cur = u, h = 0;
     while(k) {
-        if(k & 1) cur = anc[res][h];
+        if(k & 1) cur = anc[cur][h];
         k/=2, h++;
     }
 
