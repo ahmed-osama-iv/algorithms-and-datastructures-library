@@ -1,6 +1,6 @@
 
 # Algorithms and Datastructures Library
-Algorithms and Datastructures Library built to be used in the ECPC & ACPC
+Algorithms and Datastructures Library built to be used in the ECPC & ACPC,
 Collected from different resources like:
  - Geeks for Geeks 
  - Different blogs from Codeforces 
